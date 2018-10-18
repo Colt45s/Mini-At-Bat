@@ -1,0 +1,18 @@
+rulesDirectory:
+    - tslint-plugin-prettier
+extends:
+    - tslint:recommended
+    - tslint-react
+    - tslint-config-prettier
+rules:
+    prettier:
+        - true
+    member-access: false
+    ordered-imports: false
+    object-literal-sort-keys : false
+    interface-over-type-literal: false
+    no-console: false
+linterOptions:
+    exclude:
+        - dist
+        
