@@ -1,14 +1,20 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import Header from '../molecules/Header'
+import MainContainer from '../atoms/MainContainer'
 
 const PageWrapper = styled.div`
   position: relative;
-  padding: 10px;
 `
 PageWrapper.displayName = 'PageWrapper'
 
 const PageTemplate = ({ children }: any) => {
-  return <PageWrapper>{children}</PageWrapper>
+  return (
+    <PageWrapper>
+      <Header />
+      <MainContainer>{children}</MainContainer>
+    </PageWrapper>
+  )
 }
 
 export default PageTemplate
