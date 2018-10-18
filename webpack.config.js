@@ -18,7 +18,9 @@ const config = {
     path: path.join(__dirname, "./dist")
   },
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "Mini-At-Bat"
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(MODE)
