@@ -7,8 +7,6 @@ import { StandingState } from '../../reducers/standing'
 import DivisionTab from '../molecules/DivisionTab'
 
 const MainWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   width: 100%;
 `
 MainWrapper.displayName = 'MainWrapper'
@@ -38,7 +36,10 @@ class MainView extends React.Component<{
     const { standing } = this.props
     return (
       <MainWrapper>
-        <DivisionTab divisions={standing.divisionStandings} />
+        <DivisionTab
+          divisions={standing.divisionStandings}
+          isLoading={standing.isLoading}
+        />
       </MainWrapper>
     )
   }
