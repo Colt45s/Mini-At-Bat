@@ -22,4 +22,8 @@ export type TeamRecord = {
   streak: {
     streakCode: string
   }
+  clinchIndicator: string
+  gameBack: string
+  wildCardGamesBack: string
+  eliminationNumber: string
 }
