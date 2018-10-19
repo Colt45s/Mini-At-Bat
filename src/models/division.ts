@@ -26,4 +26,5 @@ export type TeamRecord = {
   gamesBack: string
   wildCardGamesBack: string
   eliminationNumber: string
+  leagueRank: string
 }
