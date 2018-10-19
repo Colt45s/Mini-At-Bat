@@ -28,7 +28,10 @@ const config = {
     })
   ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
+    alias: {
+      'assets': path.resolve(__dirname, 'assets'),
+    }
   },
   module: {
     rules: [{
