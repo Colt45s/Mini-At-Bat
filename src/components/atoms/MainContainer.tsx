@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const MainContainer = styled(Container)`
   padding-top: 5em;
+  padding-bottom: 5em;
 `
 
 export default MainContainer
