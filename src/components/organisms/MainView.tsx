@@ -4,7 +4,9 @@ import standingFetchData from '../../actions/standing'
 import styled from 'styled-components'
 import { RootState } from '../../reducers'
 import { StandingState } from '../../reducers/standing'
-import DivisionTab from '../molecules/DivisionTab'
+import StandingView from '../molecules/StandingView'
+import Overlay from '../atoms/Overlay'
+import { Loader } from 'semantic-ui-react'
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -34,12 +36,15 @@ class MainView extends React.Component<{
 
   render() {
     const { standing } = this.props
+    const { isLoading } = standing
+
+    if (isLoading) {
+      return <Overlay children={<Loader>Loading</Loader>} />
+    }
+
     return (
       <MainWrapper>
-        <DivisionTab
-          divisions={standing.divisionStandings}
-          isLoading={standing.isLoading}
-        />
+        <StandingView divisions={standing.divisionStandings} />
       </MainWrapper>
     )
   }
