@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { TeamRecord } from '../../models/division'
 import { Table, Label, Image, Header } from 'semantic-ui-react'
-import { ciTypes } from '../../utils/mlbConstants'
 import { teamLogos } from '../../utils/logos'
 
 const StandingTable = ({
@@ -16,7 +15,6 @@ const StandingTable = ({
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>{divisionName}</Table.HeaderCell>
-          <Table.HeaderCell />
           <Table.HeaderCell>Wins</Table.HeaderCell>
           <Table.HeaderCell>Losses</Table.HeaderCell>
           <Table.HeaderCell>Pct</Table.HeaderCell>
@@ -31,25 +29,17 @@ const StandingTable = ({
         {teamRecords.map(r => {
           return (
             <Table.Row key={r.team.id}>
-              <Table.Cell width={4}>
+              <Table.Cell width={6}>
                 <Header as="h4" image={true}>
                   <Image src={teamLogos[r.team.id]} size="mini" />
                   <Header.Content>
                     {r.team.name}
+                    {r.clinchIndicator ? ' - ' + r.clinchIndicator : ''}
                     <Header.Subheader>
                       League Rank: {r.leagueRank}
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
-              </Table.Cell>
-              <Table.Cell width={3}>
-                {r.clinchIndicator ? (
-                  <Label horizontal={true} style={{ marginLeft: '10px' }}>
-                    {ciTypes[r.clinchIndicator]}
-                  </Label>
-                ) : (
-                  ''
-                )}
               </Table.Cell>
               <Table.Cell>{r.wins}</Table.Cell>
               <Table.Cell>{r.losses}</Table.Cell>
