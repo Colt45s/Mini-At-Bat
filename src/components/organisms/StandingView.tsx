@@ -1,17 +1,12 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import standingFetchData from '../../actions/standing'
-import styled from 'styled-components'
 import { RootState } from '../../reducers'
 import { StandingState } from '../../reducers/standing'
-import StandingView from '../molecules/StandingView'
 import Overlay from '../atoms/Overlay'
-import { Loader } from 'semantic-ui-react'
-
-const MainWrapper = styled.div`
-  width: 100%;
-`
-MainWrapper.displayName = 'MainWrapper'
+import { Loader, Header } from 'semantic-ui-react'
+import { divisionNames } from '../../utils/mlbConstants'
+import StandingTable from '../molecules/StandingTable'
 
 const connector = connect(
   (state: RootState) => {
@@ -26,7 +21,7 @@ const connector = connect(
   }
 )
 
-class MainView extends React.Component<{
+class StandingView extends React.Component<{
   standing: StandingState
   onLoad: () => void
 }> {
@@ -39,15 +34,22 @@ class MainView extends React.Component<{
     const { isLoading } = standing
 
     if (isLoading) {
-      return <Overlay children={<Loader>Loading</Loader>} />
+      return <Overlay children={<Loader size="large">Loading</Loader>} />
     }
 
     return (
-      <MainWrapper>
-        <StandingView divisions={standing.divisionStandings} />
-      </MainWrapper>
+      <>
+        <Header as="h2">Standing</Header>
+        {standing.divisionStandings.map(d => (
+          <StandingTable
+            key={d.division.id}
+            teamRecords={d.teamRecords}
+            divisionName={divisionNames[d.division.id]}
+          />
+        ))}
+      </>
     )
   }
 }
 
-export default connector(MainView)
+export default connector(StandingView)
