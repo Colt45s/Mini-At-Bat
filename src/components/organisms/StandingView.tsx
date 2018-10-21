@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Header, Loader } from 'semantic-ui-react'
-import standingFetchData from '../../actions/standing'
+import { Loader } from 'semantic-ui-react'
 import { RootState } from '../../reducers'
 import { StandingState } from '../../reducers/standing'
 import { divisionNames } from '../../utils/mlbConstants'
@@ -14,42 +13,27 @@ const connector = connect(
       standing: state.standing
     }
   },
-  (dispatch: any) => {
-    return {
-      onLoad: () => dispatch(standingFetchData())
-    }
-  }
+  {}
 )
 
-class StandingView extends React.Component<{
-  standing: StandingState
-  onLoad: () => void
-}> {
-  componentDidMount() {
-    this.props.onLoad()
+const StandingView = ({ standing }: { standing: StandingState }) => {
+  const isLoading = standing.isLoading
+
+  if (isLoading) {
+    return <Overlay children={<Loader size="large">Loading</Loader>} />
   }
 
-  render() {
-    const { standing } = this.props
-    const { isLoading } = standing
-
-    if (isLoading) {
-      return <Overlay children={<Loader size="large">Loading</Loader>} />
-    }
-
-    return (
-      <>
-        <Header as="h2">Standing</Header>
-        {standing.divisionStandings.map(d => (
-          <StandingTable
-            key={d.division.id}
-            teamRecords={d.teamRecords}
-            divisionName={divisionNames[d.division.id]}
-          />
-        ))}
-      </>
-    )
-  }
+  return (
+    <>
+      {standing.divisionStandings.map(d => (
+        <StandingTable
+          key={d.division.id}
+          teamRecords={d.teamRecords}
+          divisionName={divisionNames[d.division.id]}
+        />
+      ))}
+    </>
+  )
 }
 
 export default connector(StandingView)

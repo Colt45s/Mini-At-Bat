@@ -15,9 +15,13 @@ const standingIsLoading = () => ({
 })
 
 export const STANDING_FETCH_DATA_SUCCESS = 'STANDING_FETCH_DATA_SUCCESS'
-const standingFetchDataSuccess = (divisions: Division[]) => ({
+const standingFetchDataSuccess = (
+  selectedYear: number,
+  divisions: Division[]
+) => ({
   type: STANDING_FETCH_DATA_SUCCESS,
   payload: {
+    selectedYear,
     divisions
   }
 })
@@ -27,15 +31,15 @@ export const mlbLeagueIds = {
   nlId: 104
 }
 
-const standingFetchData = () => {
+const standingFetchData = (year: number) => {
   return async (dispatch: any) => {
     try {
       dispatch(standingIsLoading())
 
-      const alStanding = await api.Standing.getStanding(mlbLeagueIds.alId)
-      const nlStanding = await api.Standing.getStanding(mlbLeagueIds.nlId)
+      const alStanding = await api.Standing.getStanding(mlbLeagueIds.alId, year)
+      const nlStanding = await api.Standing.getStanding(mlbLeagueIds.nlId, year)
       const divisions = alStanding.data.records.concat(nlStanding.data.records)
-      dispatch(standingFetchDataSuccess(divisions))
+      dispatch(standingFetchDataSuccess(year, divisions))
     } catch (err) {
       dispatch(standingHasErrored(''))
     }

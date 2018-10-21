@@ -6,12 +6,14 @@ import {
 import { Division } from '../models/division'
 
 export type StandingState = {
+  selectedYear?: number
   divisionStandings: Division[]
   isLoading: boolean
   err?: string
 }
 
 const defaultState = {
+  selectedYear: undefined,
   divisionStandings: [],
   isLoading: false,
   err: ''
@@ -36,6 +38,7 @@ export const reducer = (state: StandingState = defaultState, action: any) => {
 
       return {
         ...state,
+        selectedYear: action.payload.selectedYear,
         isLoading: false,
         divisionStandings: divisions
       }
