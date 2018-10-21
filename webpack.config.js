@@ -68,6 +68,8 @@ const devConfig = {
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "dist"),
+    // host: '0.0.0.0',
+    // disableHostCheck: true,
     // hot: true,
     port: DEV_PORT,
     historyApiFallback: true
