@@ -1,12 +1,8 @@
 import * as React from 'react'
-import MainView from '../organisms/MainView'
+import StandingView from '../organisms/StandingView'
 
 const Home = () => {
-  return (
-    <div>
-      <MainView />
-    </div>
-  )
+  return <StandingView />
 }
 
 export default Home
