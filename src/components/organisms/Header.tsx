@@ -2,8 +2,8 @@ import * as React from 'react'
 import { Menu, Container } from 'semantic-ui-react'
 
 const PageHeader = () => (
-  <Menu fixed="top" inverted={true}>
-    <Container>
+  <Menu fixed="top" size="large" inverted={true}>
+    <Container fluid={true}>
       <Menu.Item as="a" header={true}>
         Mini-At-Bat
       </Menu.Item>
