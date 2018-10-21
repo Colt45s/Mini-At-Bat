@@ -1,7 +1,7 @@
 import {
+  STANDING_FETCH_DATA_SUCCESS,
   STANDING_HAS_ERRORED,
-  STANDING_IS_LOADING,
-  STANDING_FETCH_DATA_SUCCESS
+  STANDING_IS_LOADING
 } from '../actions/standing'
 import { Division } from '../models/division'
 

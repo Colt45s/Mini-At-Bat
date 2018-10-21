@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { store } from './store'
-import App from './components/App'
 import 'semantic-ui-css/semantic.min.css'
+import App from './components/App'
+import { store } from './store'
 
 const root = document.createElement('div')
 document.body.appendChild(root)

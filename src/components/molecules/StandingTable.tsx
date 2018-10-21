@@ -1,6 +1,6 @@
 import * as React from 'react'
+import { Header, Image, Label, Table } from 'semantic-ui-react'
 import { TeamRecord } from '../../models/division'
-import { Table, Label, Image, Header } from 'semantic-ui-react'
 import { teamLogos } from '../../utils/logos'
 
 const StandingTable = ({

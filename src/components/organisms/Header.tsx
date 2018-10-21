@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Menu, Container } from 'semantic-ui-react'
+import { Container, Menu } from 'semantic-ui-react'
 
 const PageHeader = () => (
   <Menu fixed="top" size="large" inverted={true}>

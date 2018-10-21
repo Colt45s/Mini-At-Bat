@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
+import { Header, Loader } from 'semantic-ui-react'
 import standingFetchData from '../../actions/standing'
 import { RootState } from '../../reducers'
 import { StandingState } from '../../reducers/standing'
-import Overlay from '../atoms/Overlay'
-import { Loader, Header } from 'semantic-ui-react'
 import { divisionNames } from '../../utils/mlbConstants'
+import Overlay from '../atoms/Overlay'
 import StandingTable from '../molecules/StandingTable'
 
 const connector = connect(
