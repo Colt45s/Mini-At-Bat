@@ -1,30 +1,34 @@
 import {
+  Action,
   STANDING_FETCH_DATA_SUCCESS,
   STANDING_HAS_ERRORED,
   STANDING_IS_LOADING
 } from '../actions/standing'
-import { Division } from '../models/division'
+import { Division } from '../types/division'
 
 export type StandingState = {
   selectedYear?: number
   divisionStandings: Division[]
   isLoading: boolean
-  err?: string
+  err: boolean
 }
 
 const defaultState = {
   selectedYear: undefined,
   divisionStandings: [],
   isLoading: false,
-  err: ''
+  err: false
 }
 
-export const reducer = (state: StandingState = defaultState, action: any) => {
+export const reducer = (
+  state: StandingState = defaultState,
+  action: Action
+) => {
   switch (action.type) {
     case STANDING_HAS_ERRORED:
       return {
         ...state,
-        err: action.payload.err
+        err: true
       }
     case STANDING_IS_LOADING:
       return {
@@ -34,12 +38,13 @@ export const reducer = (state: StandingState = defaultState, action: any) => {
     case STANDING_FETCH_DATA_SUCCESS:
       const divisions = action.payload.divisions
         .slice()
-        .sort((prev: any, next: any) => prev.division.id - next.division.id)
+        .sort((prev, next) => prev.division.id - next.division.id)
 
       return {
         ...state,
         selectedYear: action.payload.selectedYear,
         isLoading: false,
+        err: false,
         divisionStandings: divisions
       }
     default:
