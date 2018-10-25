@@ -7,14 +7,14 @@ import {
 import { Division } from '../types/division'
 
 export type StandingState = {
-  selectedYear?: number
+  selectedYear: string
   divisionStandings: Division[]
   isLoading: boolean
   err: boolean
 }
 
 const defaultState = {
-  selectedYear: undefined,
+  selectedYear: '',
   divisionStandings: [],
   isLoading: false,
   err: false

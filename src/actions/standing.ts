@@ -15,7 +15,7 @@ type LoadingAction = {
 type SuccessAction = {
   type: 'STANDING_FETCH_DATA_SUCCESS'
   payload: {
-    selectedYear: number
+    selectedYear: string
     divisions: Division[]
   }
 }
@@ -32,7 +32,7 @@ const standingIsLoading = (): LoadingAction => ({
 
 export const STANDING_FETCH_DATA_SUCCESS = 'STANDING_FETCH_DATA_SUCCESS'
 const standingFetchDataSuccess = (
-  selectedYear: number,
+  selectedYear: string,
   divisions: Division[]
 ): SuccessAction => ({
   type: STANDING_FETCH_DATA_SUCCESS,
@@ -47,7 +47,7 @@ export const mlbLeagueIds = {
   nlId: 104
 }
 
-const standingFetchData = (year: number): ThunkResult<Promise<void>> => {
+const standingFetchData = (year: string): ThunkResult<Promise<void>> => {
   return async dispatch => {
     try {
       dispatch(standingIsLoading())
