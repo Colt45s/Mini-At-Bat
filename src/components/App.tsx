@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
 import { Route, Switch } from 'react-router-dom'
-import { Router } from 'react-router-dom'
-import Home from '../components/pages/Home'
+import { Redirect, Router } from 'react-router-dom'
 import { history } from '../store'
+import Standing from './pages/Standing'
 import PageTemplate from './templates/PageTemplate'
 
 const App = () => (
@@ -11,7 +11,12 @@ const App = () => (
     <PageTemplate
       children={
         <Switch>
-          <Route exact={true} path="/" component={Home} />
+          <Route
+            exact={true}
+            path="/"
+            component={() => <Redirect to="/standings" />}
+          />
+          <Route path="/standings" component={Standing} />
         </Switch>
       }
     />
