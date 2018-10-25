@@ -1,27 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { Dropdown, Header } from 'semantic-ui-react'
-import standingFetchData from '../../actions/standing'
-import { RootState } from '../../reducers'
-import { StandingState } from '../../reducers/standing'
-
-const connector = connect(
-  (state: RootState) => {
-    return {
-      standing: state.standing
-    }
-  },
-  (dispatch: any) => {
-    return {
-      serachDivisionsByYear: (
-        event?: React.SyntheticEvent<HTMLElement>,
-        data?: any
-      ) => {
-        dispatch(standingFetchData(event ? data.value : currentYear))
-      }
-    }
-  }
-)
+import { Header } from 'semantic-ui-react'
 
 const currentYear = new Date().getFullYear()
 const YEARS_LIMIT = 10
@@ -33,33 +11,49 @@ const createYearsOption = () => {
   }))
 }
 
-class StandingSearch extends React.Component<{
-  standing: StandingState
-  serachDivisionsByYear: (
-    event?: React.SyntheticEvent<HTMLElement>,
-    data?: any
-  ) => void
-}> {
-  componentDidMount() {
-    this.props.serachDivisionsByYear()
+type Props = {
+  selectedYear: string
+  push: (year: string) => void
+}
+
+type State = {
+  searchYear: string
+}
+
+class StandingSearch extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      searchYear: ''
+    }
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.selectedYear !== this.props.selectedYear) {
+      this.setState({ searchYear: this.props.selectedYear })
+    }
   }
 
   render() {
-    const { standing, serachDivisionsByYear } = this.props
-
     return (
       <>
         <Header as="h2">Standing</Header>
-        <Dropdown
-          selection={true}
-          options={createYearsOption()}
-          defaultValue={currentYear}
-          value={standing.selectedYear}
-          onChange={serachDivisionsByYear}
-        />
+        <select
+          value={this.state.searchYear}
+          onChange={e => {
+            this.setState({ searchYear: e.target.value })
+            this.props.push(e.target.value)
+          }}
+        >
+          {createYearsOption().map(o => (
+            <option key={o.key} value={o.value}>
+              {o.text}
+            </option>
+          ))}
+        </select>
       </>
     )
   }
 }
 
-export default connector(StandingSearch)
+export default StandingSearch
