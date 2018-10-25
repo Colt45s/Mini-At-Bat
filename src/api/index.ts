@@ -7,7 +7,7 @@ const requests = {
 }
 
 const Standing = {
-  getStanding: (leagueId: number, year: number) =>
+  getStanding: (leagueId: number, year: string) =>
     requests.get(`/standings?leagueId=${leagueId}&season=${year}`)
 }
 
