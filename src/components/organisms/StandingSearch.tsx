@@ -41,8 +41,9 @@ class StandingSearch extends React.Component<Props, State> {
         <select
           value={this.state.searchYear}
           onChange={e => {
-            this.setState({ searchYear: e.target.value })
-            this.props.push(e.target.value)
+            this.setState({ searchYear: e.target.value }, () => {
+              this.props.push(this.state.searchYear)
+            })
           }}
         >
           {createYearsOption().map(o => (
