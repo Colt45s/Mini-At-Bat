@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './components/App'
 import { store } from './store'
 
+document.getElementsByTagName('body')[0].style.backgroundColor = '#fcfcfc'
 const root = document.createElement('div')
 document.body.appendChild(root)
 
