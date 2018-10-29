@@ -1,5 +1,9 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
+import { RootState } from '../../reducers'
+import { SearchState } from '../../reducers/search'
 
 const currentYear = new Date().getFullYear()
 const YEARS_LIMIT = 10
@@ -12,25 +16,45 @@ const createYearsOption = () => {
 }
 
 type Props = {
-  selectedYear: string
+  search: SearchState
   push: (year: string) => void
 }
 
 type State = {
-  searchYear: string
+  selectedYear: string
 }
+
+const connector = connect(
+  (state: RootState) => {
+    return {
+      search: state.search
+    }
+  },
+  (dispatch: any, ownProps: any) => {
+    return {
+      push: (year: string) => {
+        const { location, history } = ownProps
+        const params = new URLSearchParams(location.search)
+        params.set('year', year)
+        history.push({
+          search: params.toString()
+        })
+      }
+    }
+  }
+)
 
 class StandingSearch extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      searchYear: ''
+      selectedYear: props.search.selectedYear
     }
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (prevProps.selectedYear !== this.props.selectedYear) {
-      this.setState({ searchYear: this.props.selectedYear })
+    if (prevProps.search.selectedYear !== this.props.search.selectedYear) {
+      this.setState({ selectedYear: this.props.search.selectedYear })
     }
   }
 
@@ -39,10 +63,13 @@ class StandingSearch extends React.Component<Props, State> {
       <>
         <Header as="h2">Standing</Header>
         <select
-          value={this.state.searchYear}
+          style={{
+            fontFamily: 'Lato,Helvetica Neue,Arial,Helvetica,sans-serif'
+          }}
+          value={this.state.selectedYear}
           onChange={e => {
-            this.setState({ searchYear: e.target.value }, () => {
-              this.props.push(this.state.searchYear)
+            this.setState({ selectedYear: e.target.value }, () => {
+              this.props.push(this.state.selectedYear)
             })
           }}
         >
@@ -57,4 +84,4 @@ class StandingSearch extends React.Component<Props, State> {
   }
 }
 
-export default StandingSearch
+export default withRouter(connector(StandingSearch))
