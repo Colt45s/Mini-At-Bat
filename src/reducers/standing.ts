@@ -7,14 +7,12 @@ import {
 import { Division } from '../types/division'
 
 export type StandingState = {
-  selectedYear: string
   divisionStandings: Division[]
   isLoading: boolean
   err: boolean
 }
 
 const defaultState = {
-  selectedYear: '',
   divisionStandings: [],
   isLoading: false,
   err: false
@@ -42,7 +40,6 @@ export const reducer = (
 
       return {
         ...state,
-        selectedYear: action.payload.selectedYear,
         isLoading: false,
         err: false,
         divisionStandings: divisions
