@@ -7,6 +7,8 @@ const MainWrapper = styled.div`
   padding-bottom: 5em;
 `
 
+MainWrapper.displayName = 'MainWrapper'
+
 const MainContainer = ({ children }: any) => {
   return (
     <Container>
