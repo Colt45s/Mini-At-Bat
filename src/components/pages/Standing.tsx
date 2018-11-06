@@ -1,11 +1,11 @@
 import * as React from 'react'
-import StandingSearch from '../organisms/StandingSearch'
+import { Header } from 'semantic-ui-react'
 import StandingView from '../organisms/StandingView'
 
 const Standing = () => {
   return (
     <>
-      <StandingSearch />
+      <Header as="h2">Standing</Header>
       <StandingView />
     </>
   )
