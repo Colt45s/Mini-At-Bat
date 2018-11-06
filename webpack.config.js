@@ -78,14 +78,7 @@ const devConfig = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
     // ,new webpack.HotModuleReplacementPlugin()
-  ],
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: false
-      })
-    ]
-  }
+  ]
 };
 
 const prdConfig = {};
