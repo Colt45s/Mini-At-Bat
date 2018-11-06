@@ -71,7 +71,7 @@ class FixableHeader extends React.Component<Props, OwnProps> {
   }
 
   render() {
-    const { menuFixed } = this.state
+    const { menuFixed, selectedYear } = this.state
     const { location } = this.props
     return (
       <Visibility
@@ -116,8 +116,8 @@ class FixableHeader extends React.Component<Props, OwnProps> {
             <Menu.Menu position="right">
               <Dropdown
                 item={true}
-                text={this.state.selectedYear}
-                defaultValue={this.state.selectedYear}
+                text={selectedYear}
+                defaultValue={selectedYear}
                 onChange={this.changeYear}
                 options={createYearsOption()}
               />
