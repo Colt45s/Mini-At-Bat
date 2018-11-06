@@ -1,13 +1,13 @@
 import * as React from 'react'
 import MainContainer from '../atoms/MainContainer'
-import FixHeader from '../organisms/FixableHeader'
+import FixableHeader from '../organisms/FixableHeader'
 import Header from '../organisms/Header'
 
 const PageTemplate = ({ children }: any) => {
   return (
     <>
       <Header />
-      <FixHeader />
+      <FixableHeader />
       <MainContainer>{children}</MainContainer>
     </>
   )
