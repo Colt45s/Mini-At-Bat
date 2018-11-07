@@ -59,28 +59,17 @@ class FixableHeader extends React.Component<Props, OwnProps> {
     }
   }
 
-  stickTopMenu() {
-    this.setState({ menuFixed: true })
-  }
-
-  unStickTopMenu() {
-    this.setState({ menuFixed: false })
-  }
-
-  changeYear(e: any, { value }: any) {
-    const yearString = value.toString()
-    this.setState({ selectedYear: yearString }, () => {
-      this.props.push(this.state.selectedYear)
-    })
-  }
-
   render() {
     const { menuFixed, selectedYear } = this.state
     const { location } = this.props
     return (
       <Visibility
-        onBottomPassed={this.stickTopMenu}
-        onBottomVisible={this.unStickTopMenu}
+        onBottomPassed={() => {
+          this.setState({ menuFixed: true })
+        }}
+        onBottomVisible={() => {
+          this.setState({ menuFixed: false })
+        }}
         once={false}
       >
         <Menu
@@ -122,7 +111,12 @@ class FixableHeader extends React.Component<Props, OwnProps> {
                 item={true}
                 text={selectedYear}
                 defaultValue={selectedYear}
-                onChange={this.changeYear}
+                onChange={(e: any, { value }: any) => {
+                  const yearString = value.toString()
+                  this.setState({ selectedYear: yearString }, () => {
+                    this.props.push(this.state.selectedYear)
+                  })
+                }}
                 options={createYearsOption()}
               />
             </Menu.Menu>
