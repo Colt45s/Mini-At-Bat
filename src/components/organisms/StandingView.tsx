@@ -36,6 +36,7 @@ const connector = connect(
     }
   }
 )
+
 class StandingView extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     if (prevProps.location !== this.props.location) {
