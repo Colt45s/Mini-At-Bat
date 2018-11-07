@@ -3,7 +3,7 @@ import MainContainer from '../atoms/MainContainer'
 import FixableHeader from '../organisms/FixableHeader'
 import Header from '../organisms/Header'
 
-const PageTemplate = ({ children }: any) => {
+const Layout = ({ children }: any) => {
   return (
     <>
       <Header />
@@ -13,4 +13,4 @@ const PageTemplate = ({ children }: any) => {
   )
 }
 
-export default PageTemplate
+export default Layout
