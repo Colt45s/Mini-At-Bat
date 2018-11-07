@@ -59,11 +59,15 @@ class FixableHeader extends React.Component<Props, OwnProps> {
     }
   }
 
-  stickTopMenu = () => this.setState({ menuFixed: true })
+  stickTopMenu() {
+    this.setState({ menuFixed: true })
+  }
 
-  unStickTopMenu = () => this.setState({ menuFixed: false })
+  unStickTopMenu() {
+    this.setState({ menuFixed: false })
+  }
 
-  changeYear = (e: any, { value }: any) => {
+  changeYear(e: any, { value }: any) {
     const yearString = value.toString()
     this.setState({ selectedYear: yearString }, () => {
       this.props.push(this.state.selectedYear)
