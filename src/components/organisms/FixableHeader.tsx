@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 import { Container, Dropdown, Menu, Visibility } from 'semantic-ui-react'
 import { RootState } from '../../reducers'
-import { SearchState } from '../../reducers/search'
+import getSelectedYear from '../../utils/getSelectedYear'
 
 type Props = {
-  search: SearchState
   push: (year: string) => void
   location: any
 }
@@ -29,9 +28,7 @@ const createYearsOption = () => {
 
 const connector = connect(
   (state: RootState) => {
-    return {
-      search: state.search
-    }
+    return {}
   },
   (dispatch: any, ownProps: any) => {
     return {
@@ -49,14 +46,14 @@ const connector = connect(
 
 class FixableHeader extends React.Component<Props, OwnProps> {
   state = {
-    selectedYear: this.props.search.selectedYear,
+    selectedYear: '',
     menuFixed: false
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.search.selectedYear !== this.props.search.selectedYear) {
-      this.setState({ selectedYear: this.props.search.selectedYear })
-    }
+  componentDidMount() {
+    const year = getSelectedYear(this.props.location.search)
+
+    this.setState({ ...this.state, selectedYear: year })
   }
 
   render() {

@@ -1,13 +1,10 @@
-import queryString from 'query-string'
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
-import searchOptionChange from '../../actions/search'
 import standingFetchData from '../../actions/standing'
-import { RootState } from '../../reducers'
 import { StandingState } from '../../reducers/standing'
+import getSelectedYear from '../../utils/getSelectedYear'
 import { divisionNames } from '../../utils/mlbConstants'
+import routerEnhancer from '../../utils/routerEnhancer'
 import Overlay from '../atoms/Overlay'
 import StandingTable from '../molecules/StandingTable'
 
@@ -17,56 +14,36 @@ type Props = {
   search: () => void
 }
 
-const currentYear = new Date().getFullYear().toString()
-
-const connector = connect(
-  (state: RootState) => {
+export default routerEnhancer<Props>(
+  state => {
     return {
       standing: state.standing
     }
   },
-  (dispatch: any, ownProps: any) => {
+  (dispatch, ownProps) => {
     return {
       search: () => {
-        const year: any =
-          queryString.parse(ownProps.location.search).year || currentYear
-        dispatch(searchOptionChange(year))
+        const year = getSelectedYear(ownProps.location.search)
         dispatch(standingFetchData(year))
       }
     }
   }
-)
+)((props: Props) => {
+  const { divisionStandings, isLoading } = props.standing
 
-class StandingView extends React.Component<Props> {
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.location !== this.props.location) {
-      this.props.search()
-    }
+  if (isLoading) {
+    return <Overlay children={<Loader size="large">Loading</Loader>} />
   }
 
-  componentDidMount() {
-    this.props.search()
-  }
-
-  render() {
-    const { divisionStandings, isLoading } = this.props.standing
-
-    if (isLoading) {
-      return <Overlay children={<Loader size="large">Loading</Loader>} />
-    }
-
-    return (
-      <>
-        {divisionStandings.map(d => (
-          <StandingTable
-            key={d.division.id}
-            teamRecords={d.teamRecords}
-            divisionName={divisionNames[d.division.id]}
-          />
-        ))}
-      </>
-    )
-  }
-}
-
-export default withRouter(connector(StandingView))
+  return (
+    <>
+      {divisionStandings.map(d => (
+        <StandingTable
+          key={d.division.id}
+          teamRecords={d.teamRecords}
+          divisionName={divisionNames[d.division.id]}
+        />
+      ))}
+    </>
+  )
+})
