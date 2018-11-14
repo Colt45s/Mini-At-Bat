@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { lifecycle } from 'recompose'
 import { Loader } from 'semantic-ui-react'
 import standingFetchData from '../../actions/standing'
 import { StandingState } from '../../reducers/standing'
@@ -27,7 +28,17 @@ export default routerEnhancer<Props>(
         dispatch(standingFetchData(year))
       }
     }
-  }
+  },
+  lifecycle({
+    componentDidUpdate(prevProps: Props) {
+      if (prevProps.location !== this.props.location) {
+        this.props.search()
+      }
+    },
+    componentDidMount() {
+      this.props.search()
+    }
+  })
 )((props: Props) => {
   const { divisionStandings, isLoading } = props.standing
 

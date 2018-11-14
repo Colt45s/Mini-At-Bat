@@ -7,7 +7,8 @@ import { Actions } from '../types/Actions'
 
 export default <P>(
   s: (state: RootState) => any,
-  d: (dispatch: ThunkDispatch<RootState, {}, Actions>, ownProps: P) => any
+  d: (dispatch: ThunkDispatch<RootState, {}, Actions>, ownProps: P) => any,
+  ...hocs: any[]
 ) =>
   (compose as any)(
     withRouter,
@@ -15,14 +16,5 @@ export default <P>(
       s,
       d
     ),
-    lifecycle({
-      componentDidUpdate({ location }: any) {
-        if (location !== this.props.location) {
-          this.props.search()
-        }
-      },
-      componentDidMount() {
-        this.props.search()
-      }
-    })
+    ...hocs
   )
