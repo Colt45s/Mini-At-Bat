@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader'
-import { Route, Switch } from 'react-router-dom'
-import { Redirect, Router } from 'react-router-dom'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
 import { history } from '../store'
 import Layout from './layout'
 import Standing from './pages/Standing'
