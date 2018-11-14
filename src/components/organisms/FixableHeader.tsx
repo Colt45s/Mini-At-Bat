@@ -74,6 +74,8 @@ class FixableHeader extends React.Component<Props, OwnProps> {
           borderless={true}
           fixed={menuFixed ? 'top' : undefined}
           style={{ borderRadius: 0 }}
+          pointing={true}
+          secondary={true}
         >
           <Container>
             <Menu.Item
@@ -82,24 +84,28 @@ class FixableHeader extends React.Component<Props, OwnProps> {
                 pathname: '/standings',
                 search: location.search
               }}
+              active={location.pathname === '/standings'}
             >
               Standings
             </Menu.Item>
             <Menu.Item
               as={Link}
               to={{ pathname: '/schedule', search: location.search }}
+              active={location.pathname === '/schedule'}
             >
               Schedules
             </Menu.Item>
             <Menu.Item
               as={Link}
               to={{ pathname: '/stats', search: location.search }}
+              active={location.pathname === '/stats'}
             >
               Stats
             </Menu.Item>
             <Menu.Item
               as={Link}
               to={{ pathname: '/draft', search: location.search }}
+              active={location.pathname === '/draft'}
             >
               Draft
             </Menu.Item>
