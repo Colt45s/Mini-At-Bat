@@ -1,8 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const merge = require("webpack-merge");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const Copy = require("copy-webpack-plugin")
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const MODE = process.env.NODE_ENV || "development";
 const IS_DEV_MODE = MODE === "development";
@@ -18,10 +18,11 @@ const config = {
     path: path.join(__dirname, "./dist")
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: "Mini-At-Bat",
-      meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
-    }),
+    new Copy([
+      {
+        from: 'public/index.html'
+      }
+    ]),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(MODE)
