@@ -73,7 +73,7 @@ class FixableHeader extends React.Component<Props, OwnProps> {
           stackable={true}
           borderless={true}
           fixed={menuFixed ? 'top' : undefined}
-          style={{ borderRadius: 0 }}
+          style={{ background: '#fff' }}
           pointing={true}
           secondary={true}
         >
