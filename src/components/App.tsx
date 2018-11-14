@@ -16,7 +16,6 @@ const App = () => (
             component={() => <Redirect to="/standings" />}
           />
           <Route path="/standings" component={Standing} />
-          <Route path="*" component={Standing} />
         </Switch>
       }
     />
