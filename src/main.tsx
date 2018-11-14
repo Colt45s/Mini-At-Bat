@@ -2,16 +2,20 @@ import * as React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css'
+import { injectGlobal } from 'styled-components'
 import App from './components/App'
 import { store } from './store'
 
-document.getElementsByTagName('body')[0].style.backgroundColor = '#fcfcfc'
-const root = document.createElement('div')
-document.body.appendChild(root)
+// tslint:disable-next-line:no-unused-expression
+injectGlobal`
+  body {
+    background-color: #fcfcfc
+  }
+`
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  root
+  document.getElementById('root')
 )
