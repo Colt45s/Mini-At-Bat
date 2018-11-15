@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
-import { Container, Dropdown, Menu, Visibility } from 'semantic-ui-react'
+import { Container, Dropdown, Grid, Menu, Visibility } from 'semantic-ui-react'
 import { RootState } from '../../reducers'
 import getSelectedYear from '../../utils/getSelectedYear'
 
@@ -70,46 +70,15 @@ class FixableHeader extends React.Component<Props, OwnProps> {
         once={false}
       >
         <Menu
-          stackable={true}
           borderless={true}
           fixed={menuFixed ? 'top' : undefined}
           style={{ background: '#fff' }}
           pointing={true}
           secondary={true}
+          size="small"
         >
           <Container>
-            <Menu.Item
-              as={Link}
-              to={{
-                pathname: '/standings',
-                search: location.search
-              }}
-              active={location.pathname === '/standings'}
-            >
-              Standings
-            </Menu.Item>
-            <Menu.Item
-              as={Link}
-              to={{ pathname: '/schedule', search: location.search }}
-              active={location.pathname === '/schedule'}
-            >
-              Schedules
-            </Menu.Item>
-            <Menu.Item
-              as={Link}
-              to={{ pathname: '/stats', search: location.search }}
-              active={location.pathname === '/stats'}
-            >
-              Stats
-            </Menu.Item>
-            <Menu.Item
-              as={Link}
-              to={{ pathname: '/draft', search: location.search }}
-              active={location.pathname === '/draft'}
-            >
-              Draft
-            </Menu.Item>
-            <Menu.Menu position="right">
+            <Menu.Menu>
               <Dropdown
                 item={true}
                 text={selectedYear}
@@ -122,6 +91,39 @@ class FixableHeader extends React.Component<Props, OwnProps> {
                 }}
                 options={createYearsOption()}
               />
+            </Menu.Menu>
+            <Menu.Menu position="right">
+              <Menu.Item
+                as={Link}
+                to={{
+                  pathname: '/standings',
+                  search: location.search
+                }}
+                active={location.pathname === '/standings'}
+              >
+                Standings
+              </Menu.Item>
+              <Menu.Item
+                as={Link}
+                to={{ pathname: '/schedule', search: location.search }}
+                active={location.pathname === '/schedule'}
+              >
+                Schedules
+              </Menu.Item>
+              <Menu.Item
+                as={Link}
+                to={{ pathname: '/stats', search: location.search }}
+                active={location.pathname === '/stats'}
+              >
+                Stats
+              </Menu.Item>
+              <Menu.Item
+                as={Link}
+                to={{ pathname: '/draft', search: location.search }}
+                active={location.pathname === '/draft'}
+              >
+                Draft
+              </Menu.Item>
             </Menu.Menu>
           </Container>
         </Menu>
