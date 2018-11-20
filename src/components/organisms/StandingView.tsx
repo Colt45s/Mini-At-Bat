@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { lifecycle } from 'recompose'
 import { Loader } from 'semantic-ui-react'
 import standingFetchData from '../../actions/standing'

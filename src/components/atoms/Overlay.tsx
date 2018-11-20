@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { Dimmer } from 'semantic-ui-react'
 
 const Overlay = ({ children }: any) => (

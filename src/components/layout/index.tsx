@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import MainContainer from '../atoms/MainContainer'
 import FixableHeader from '../organisms/FixableHeader'
 import Header from '../organisms/Header'
