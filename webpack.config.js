@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const merge = require("webpack-merge");
-const Copy = require("copy-webpack-plugin")
+const Copy = require("copy-webpack-plugin");
 // const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 const MODE = process.env.NODE_ENV || "development";
@@ -52,7 +52,7 @@ const config = {
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        loader: "url-loader?limit=100000"
+        use: ["url-loader?limit=100000"]
       }
     ]
   }
